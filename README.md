@@ -11,19 +11,27 @@ Welcome to the Talky Protocol. It's so difficult, you might have a hard time lea
 
 ##Messages:
 
-```M:Message```
+```
+M:Message
+```
 
 ##Commands:
 
-```M:/command args```
+```
+M:/command args
+```
 
 ##Ping (TBI)
 
-```P:PING```
+```
+P:PING
+```
 
 Response:
 
-```P:PING```
+```
+P:PING
+```
 
 Ping pong is boring, sorry.
 
