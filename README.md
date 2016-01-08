@@ -27,13 +27,16 @@ M:/command args
 P:PING
 ```
 
-Response:
+*Response:*
 
 ```
 P:PING
 ```
 
 Ping pong is boring, sorry.
+
+##Watch me make it maybe.
+I sometimes stream on [Twitch.TV](https://twitch.tv/sysvoid). Feel free to watch me there if I happen to be streaming or something.
 
 ##Contributing
 Follow my fucking code style or go away. Thanks. <3
