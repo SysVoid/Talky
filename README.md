@@ -4,21 +4,27 @@ Please don't hate it. It's nice.
 
 #LAZY!
 Not committing that chat client quite yet, so for now - feel free to communicate with it
-using Telnet and the [Protocol](#Protocol) below.
+using Telnet and the [Protocol](#protocol) below.
 
 #Protocol
 Welcome to the Talky Protocol. It's so difficult, you might have a hard time learning it.
 
 ##Messages:
+
 ```M:Message```
 
 ##Commands:
+
 ```M:/command args```
 
 ##Ping (TBI)
+
 ```P:PING```
+
 Response:
+
 ```P:PING```
+
 Ping pong is boring, sorry.
 
 ##Contributing
