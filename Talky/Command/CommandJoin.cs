@@ -37,6 +37,12 @@ namespace Talky.Command
                 return;
             }
 
+            if (client.Channel.Equals(channel))
+            {
+                client.SendMessage("You are already in that channel!");
+                return;
+            }
+
             client.JoinChannel(channel);
         }
 
