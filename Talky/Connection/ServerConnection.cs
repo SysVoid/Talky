@@ -46,6 +46,7 @@ namespace Talky.Connection
 
                 ChatMessage chatMessage = new ChatMessage(Client, line);
                 CommandMessage commandMessage = new CommandMessage(Client, line);
+                StatMessage statMessage = new StatMessage(Client, line);
 
                 if (chatMessage.Valid())
                 {
@@ -53,6 +54,9 @@ namespace Talky.Connection
                 } else if (commandMessage.Valid())
                 {
                     commandMessage.Handle();
+                } else if (statMessage.Valid())
+                {
+                    statMessage.Handle();
                 } else
                 {
                     // ???

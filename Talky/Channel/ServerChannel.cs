@@ -20,7 +20,7 @@ namespace Talky.Channel
                 name = "+" + name;
             }
 
-            Name = name.ToLower();
+            Name = name.Replace(";", "-").Replace(":", "-").ToLower();
             Locked = locked;
         }
 

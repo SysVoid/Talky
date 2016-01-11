@@ -14,12 +14,23 @@ namespace Talky.Client
     {
 
         public TcpClient TcpClient { get; set; }
-        public string Username { get; set; } = "%";
+
+        private string _username;
+        public string Username
+        {
+            get { return _username; }
+            set
+            {
+                _username = value.Replace(";", "-");
+            }
+        }
+
         public bool Muted { get; set; } = false;
         public ServerChannel Channel { get; private set; }
 
         public ServerClient(TcpClient client)
         {
+            Username = "%";
             TcpClient = client;
         }
 
