@@ -33,6 +33,7 @@ namespace Talky.Command
             {
                 client.SendMessage("That channel does not exist.");
                 client.SendMessage("Use /clist to see a list of channels.");
+                client.SendMessage("Use /cc to create a temporary channel.");
                 return;
             }
 

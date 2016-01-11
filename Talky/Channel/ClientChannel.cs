@@ -9,7 +9,7 @@ namespace Talky.Channel
     class ClientChannel : ServerChannel
     {
 
-        public ClientChannel(string name, bool locked) : base(name, locked) { }
+        public ClientChannel(string name) : base(name, false) { }
 
     }
 }

@@ -21,6 +21,10 @@ namespace Talky.Client
             get { return _username; }
             set
             {
+                if (value.Length > 16)
+                {
+                    value = value.Substring(0, 15);
+                }
                 _username = value.Replace(";", "-");
             }
         }
@@ -46,9 +50,9 @@ namespace Talky.Client
                 StreamWriter writer = new StreamWriter(TcpClient.GetStream());
                 writer.WriteLine(message);
                 writer.Flush();
-            } catch (System.Exception e)
+            } catch
             {
-                Console.WriteLine(e.StackTrace);
+                Disconnect();
             }
         }
 

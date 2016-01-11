@@ -41,6 +41,7 @@ namespace Talky
                 _commandManager.RegisterCommand(new CommandName());
                 _commandManager.RegisterCommand(new CommandJoin());
                 _commandManager.RegisterCommand(new CommandClist());
+                _commandManager.RegisterCommand(new CommandCC());
             } catch (CommandExistsException cEE)
             {
                 Console.WriteLine(cEE.StackTrace);
@@ -55,6 +56,9 @@ namespace Talky
 
             Thread serverMessageThread = new Thread(new ThreadStart(ServerMessageReader));
             serverMessageThread.Start();
+
+            Thread channelManagerThread = new Thread(new ThreadStart(MonitorChannels));
+            channelManagerThread.Start();
         }
 
         private void ShowConsole()
@@ -128,6 +132,27 @@ namespace Talky
 
                 Thread clientThread = new Thread(new ThreadStart(new ServerConnection(serverClient).HandleMessages));
                 clientThread.Start();
+            }
+        }
+
+        private void MonitorChannels()
+        {
+            while (true)
+            {
+                IReadOnlyCollection<ClientChannel> clientChannels = _channelRepository.Get<ClientChannel>();
+
+                if (clientChannels.Count > 0)
+                {
+                    foreach (ClientChannel clientChannel in clientChannels)
+                    {
+                        if (_clientRepository.Find(clientChannel).Count == 0)
+                        {
+                            _channelRepository.Remove(clientChannel);
+                        }
+                    }
+                }
+
+                Thread.Sleep(5000);
             }
         }
 

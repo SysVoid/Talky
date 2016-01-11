@@ -79,6 +79,7 @@
     <Compile Include="Client\ClientRepository.cs" />
     <Compile Include="Client\ServerClient.cs" />
     <Compile Include="Command\CommandClist.cs" />
+    <Compile Include="Command\CommandCC.cs" />
     <Compile Include="Command\CommandManager.cs" />
     <Compile Include="Command\CommandHelp.cs" />
     <Compile Include="Command\CommandJoin.cs" />

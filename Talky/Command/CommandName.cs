@@ -23,9 +23,9 @@ namespace Talky.Command
 
             string desiredUsername = args[0];
 
-            if (desiredUsername.Contains("%") || desiredUsername.Contains("/") || desiredUsername.Contains("@") || desiredUsername.Contains("\\") || desiredUsername.Contains(";"))
+            if (desiredUsername.Length > 16 || desiredUsername.Contains("%") || desiredUsername.Contains("/") || desiredUsername.Contains("@") || desiredUsername.Contains("\\") || desiredUsername.Contains(";"))
             {
-                client.SendMessage("Invalid username. Usernames may not contain %, /, @, ; or \\.");
+                client.SendMessage("Invalid username. Usernames may not contain %, /, @, ; or \\. Usernames also have a maximum length of 16 characters.");
                 return;
             }
 
