@@ -119,7 +119,7 @@ namespace Talky
         {
             foreach (ServerClient client in ClientRepository.Instance.All())
             {
-                client.SendMessage("[GLOBAL] " + message);
+                client.SendMessage("![GLOBAL]! " + message);
             }
         }
 
