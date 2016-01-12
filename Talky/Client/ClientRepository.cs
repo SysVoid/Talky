@@ -32,7 +32,7 @@ namespace Talky.Client
             {
                 foreach (ServerClient client in _clients)
                 {
-                    if (client.Username.Equals(username))
+                    if (client.Username.ToLower().Equals(username))
                     {
                         return client;
                     }

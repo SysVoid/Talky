@@ -43,7 +43,13 @@ namespace Talky.Message
                 _client.SendRawMessage("S:ChannelList:" + channels);
             } else if (actualMessage.Equals("Client"))
             {
-                _client.SendRawMessage($"S:Client:{_client.Username};{_client.Muted.ToString()};{_client.Channel.Name}");
+                _client.SendRawMessage($"S:Client:{(_client.Username.Equals("%") ? "N/A" : _client.Username)};{_client.Muted.ToString()};{(_client.Channel == null ? "N/A" : _client.Channel.Name)}");
+            } else if (actualMessage.Equals("Account"))
+            {
+                if (_client.Account != null)
+                {
+                    _client.SendRawMessage($"S:Account:{_client.Account.AccountId};{_client.Account.Username};{_client.Account.Role}");
+                }
             }
         }
 

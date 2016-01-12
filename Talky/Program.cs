@@ -32,8 +32,7 @@ namespace Talky
         private Program()
         {
             _channelRepository.Store(new LobbyChannel("+lobby"));
-            _channelRepository.Store(new SystemChannel("+test-1", false));
-            _channelRepository.Store(new SystemChannel("+test-2", true));
+            _channelRepository.Store(new SystemChannel("+admins", true));
 
             try
             {
@@ -42,6 +41,8 @@ namespace Talky
                 _commandManager.RegisterCommand(new CommandJoin());
                 _commandManager.RegisterCommand(new CommandClist());
                 _commandManager.RegisterCommand(new CommandCC());
+                _commandManager.RegisterCommand(new CommandAuth());
+                _commandManager.RegisterCommand(new CommandRegister());
             } catch (CommandExistsException cEE)
             {
                 Console.WriteLine(cEE.StackTrace);

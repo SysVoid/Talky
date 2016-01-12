@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Talky.Client;
 using Talky.Channel;
+using Talky.Authentication;
 
 namespace Talky.Command
 {
@@ -32,6 +33,19 @@ namespace Talky.Command
             if (ClientRepository.Instance.Exists(desiredUsername))
             {
                 client.SendMessage("That username is already in use.");
+                return;
+            }
+
+            if (UserAccount.Find(desiredUsername) != null)
+            {
+                client.SendMessage("That username is linked to an account.");
+                client.SendMessage("If you are the account holder, use /auth to login and claim the username.");
+                return;
+            }
+
+            if (client.Account != null)
+            {
+                client.SendMessage("Authenticated clients may not change their username.");
                 return;
             }
 

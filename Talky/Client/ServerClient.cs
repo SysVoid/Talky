@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.IO;
 using Talky.Channel;
+using Talky.Authentication;
 
 namespace Talky.Client
 {
@@ -31,6 +32,8 @@ namespace Talky.Client
 
         public bool Muted { get; set; } = false;
         public ServerChannel Channel { get; private set; }
+
+        public UserAccount Account { get; set; }
 
         public ServerClient(TcpClient client)
         {
@@ -70,8 +73,11 @@ namespace Talky.Client
         {
             if (channel.Locked)
             {
-                SendMessage("That channel is locked!");
-                return;
+                if (Account == null || !Account.Role.Equals("admin"))
+                {
+                    SendMessage("That channel is locked!");
+                    return;
+                }
             }
 
             if (Channel != null)

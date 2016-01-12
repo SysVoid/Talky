@@ -20,7 +20,14 @@ namespace Talky.Message
         protected override void Process()
         {
             string actualMessage = _message.Substring(2);
-            _client.Channel.BroadcastMessage($"[{_client.Username}] {actualMessage}");
+
+            if (actualMessage.StartsWith("register") || actualMessage.StartsWith("auth"))
+            {
+                _client.SendMessage("To protect our users, we do not send messages starting with 'register' or 'auth'. This is in case they miss out the / on the register or auth commands.");
+                return;
+            }
+
+            _client.Channel.BroadcastMessage($"[{(_client.Account != null && _client.Account.Role.Equals("admin") ? "%" : "")}{_client.Username}] {actualMessage}");
         }
 
     }

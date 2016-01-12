@@ -29,9 +29,10 @@ namespace Talky.Message
                 args = _message.Substring(4 + command.Length).Split(new char[] { ' ' });
             }
 
-            if (_client.Channel == null && !command.Equals("name"))
+            if (_client.Channel == null && !(command.Equals("name") || command.Equals("auth")))
             {
                 _client.SendMessage("Please use /name <name> to set a username before using commands.");
+                _client.SendMessage("If you are a registered client, please use /auth to claim your username.");
                 return;
             }
 
