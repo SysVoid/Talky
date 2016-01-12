@@ -33,7 +33,7 @@ namespace Talky.Client
         public bool Muted { get; set; } = false;
         public ServerChannel Channel { get; private set; }
 
-        public UserAccount Account { get; set; }
+        public UserAccount Account { get; set; } = null;
 
         public ServerClient(TcpClient client)
         {

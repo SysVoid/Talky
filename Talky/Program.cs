@@ -43,6 +43,7 @@ namespace Talky
                 _commandManager.RegisterCommand(new CommandCC());
                 _commandManager.RegisterCommand(new CommandAuth());
                 _commandManager.RegisterCommand(new CommandRegister());
+                _commandManager.RegisterCommand(new CommandRole());
             } catch (CommandExistsException cEE)
             {
                 Console.WriteLine(cEE.StackTrace);

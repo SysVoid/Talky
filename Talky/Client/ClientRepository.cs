@@ -72,7 +72,7 @@ namespace Talky.Client
                 List<ServerClient> clients = new List<ServerClient>();
                 foreach (ServerClient client in _clients)
                 {
-                    if (client.Channel.Equals(channel))
+                    if (client.Channel != null && client.Channel.Equals(channel))
                     {
                         clients.Add(client);
                     }

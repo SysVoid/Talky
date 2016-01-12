@@ -27,6 +27,25 @@ namespace Talky.Authentication
             Role = role;
         }
 
+        public bool SetRole(string role)
+        {
+            if (!(role.Equals("admin") || role.Equals("user")))
+            {
+                return false;
+            }
+
+            MySqlConnection connection = MySQLConnector.GetConnection();
+            MySqlCommand updateCommand = new MySqlCommand("UPDATE `users` SET `role`=@role WHERE `id`=@id ORDER BY `id` ASC LIMIT 1", connection);
+            updateCommand.Prepare();
+            updateCommand.Parameters.AddWithValue("@role", role);
+            updateCommand.Parameters.AddWithValue("@id", AccountId);
+            updateCommand.ExecuteReader();
+            connection.Close();
+
+            Role = role;
+            return true;
+        }
+
         public static string Hash(string password)
         {
             SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();

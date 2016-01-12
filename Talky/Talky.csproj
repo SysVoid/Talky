@@ -86,6 +86,7 @@
     <Compile Include="Channel\SystemChannel.cs" />
     <Compile Include="Client\ClientRepository.cs" />
     <Compile Include="Client\ServerClient.cs" />
+    <Compile Include="Command\CommandRole.cs" />
     <Compile Include="Command\CommandAuth.cs" />
     <Compile Include="Command\CommandRegister.cs" />
     <Compile Include="Command\CommandClist.cs" />
