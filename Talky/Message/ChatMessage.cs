@@ -25,11 +25,6 @@ namespace Talky.Message
                 actualMessage = actualMessage.Substring(1);
             }
 
-            while (actualMessage.EndsWith(" "))
-            {
-                actualMessage = actualMessage.Substring(0, actualMessage.Length - 1);
-            }
-
             if (actualMessage.StartsWith("register") || actualMessage.StartsWith("auth"))
             {
                 _client.SendMessage("To protect our users, we do not send messages starting with 'register' or 'auth'. This is in case they miss out the / on the register or auth commands.");

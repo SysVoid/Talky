@@ -49,6 +49,11 @@ namespace Talky.Connection
                     line = line.Replace("  ", " ");
                 }
 
+                while (line.EndsWith(" "))
+                {
+                    line = line.Substring(0, line.Length - 1);
+                }
+
                 ChatMessage chatMessage = new ChatMessage(Client, line);
                 CommandMessage commandMessage = new CommandMessage(Client, line);
                 StatMessage statMessage = new StatMessage(Client, line);

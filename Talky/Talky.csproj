@@ -87,6 +87,7 @@
     <Compile Include="Client\ClientRepository.cs" />
     <Compile Include="Client\ServerClient.cs" />
     <Compile Include="Command\CommandChangePassword.cs" />
+    <Compile Include="Command\CommandMsg.cs" />
     <Compile Include="Command\CommandMute.cs" />
     <Compile Include="Command\CommandKick.cs" />
     <Compile Include="Command\CommandRole.cs" />
