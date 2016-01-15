@@ -21,11 +21,15 @@ namespace Talky
         public const double SPAM_DELAY = 0.5;
         public static readonly DateTime EPOCH_START = new DateTime(1970, 1, 1);
 
+        public bool PanicMode { get; private set; } = false;
+
         private ChannelRepository _channelRepository = ChannelRepository.Instance;
         private ClientRepository _clientRepository = ClientRepository.Instance;
         private CommandManager _commandManager = CommandManager.Instance;
 
         public int Port { get; } = 4096;
+
+        public static Program Instance { get; private set; }
 
         static void Main(string[] args)
         {
@@ -34,6 +38,8 @@ namespace Talky
 
         private Program()
         {
+            Instance = this;
+
             _channelRepository.Store(new LobbyChannel("+lobby"));
             _channelRepository.Store(new SystemChannel("+admins", true));
 
@@ -70,9 +76,42 @@ namespace Talky
             channelManagerThread.Start();
         }
 
+        public void OHGODNO(string WHAT, System.Exception theRealProblem = null)
+        {
+            PanicMode = true;
+
+            IReadOnlyCollection<ServerClient> clients = _clientRepository.All();
+            foreach (ServerClient client in clients)
+            {
+                client.Disconnect("Server went into panic mode.");
+            }
+
+            Thread.Sleep(501);
+
+            Console.Clear();
+            Console.WriteLine("======================================");
+            Console.WriteLine("=        SERVER IN PANIC MODE        =");
+            Console.WriteLine("=         SEE PROBLEMS BELOW         =");
+            Console.WriteLine("======================================");
+            Console.WriteLine("");
+            Console.WriteLine("DEAR GOD! NO!! A BUG! IT'S ALL BROKEN!");
+            Console.WriteLine(WHAT);
+
+            if (theRealProblem != null)
+            {
+                Console.WriteLine("");
+                Console.WriteLine(theRealProblem.Message);
+            }
+            Console.WriteLine("");
+
+            Console.WriteLine("Press a key or something to exit... I won't mind...");
+            Console.ReadKey();
+            Environment.Exit(0);
+        }
+
         private void ShowConsole()
         {
-            while (true)
+            while (!PanicMode)
             {
                 int before = Console.CursorLeft;
 
@@ -103,7 +142,7 @@ namespace Talky
 
         public void ServerMessageReader()
         {
-            while (true)
+            while (!PanicMode)
             {
                 string input = Console.ReadLine();
 
@@ -134,7 +173,7 @@ namespace Talky
         {
             TcpListener listener = new TcpListener(IPAddress.Any, Port);
             listener.Start();
-            while (true)
+            while (!PanicMode)
             {
                 TcpClient tcpClient = listener.AcceptTcpClient();
                 ServerClient serverClient = new ServerClient(tcpClient);
@@ -146,7 +185,7 @@ namespace Talky
 
         private void MonitorChannels()
         {
-            while (true)
+            while (!PanicMode)
             {
                 IReadOnlyCollection<ClientChannel> clientChannels = _channelRepository.Get<ClientChannel>();
 

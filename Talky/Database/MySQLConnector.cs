@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Talky.Database
@@ -21,8 +22,9 @@ namespace Talky.Database
                 connection.ChangeDatabase("talky");
 
                 return connection;
-            } catch
+            } catch (MySqlException e)
             {
+                Program.Instance.OHGODNO("Terminate!! Could not connect to MySQL!! Danger!! Danger!!", e);
                 return null;
             }
         }
