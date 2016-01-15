@@ -16,6 +16,9 @@ namespace Talky.Client
 
         public TcpClient TcpClient { get; set; }
 
+        public int lastMessage { get; set; } = 0;
+        public int lastCommand { get; set; } = 0;
+
         private string _username;
         public string Username
         {

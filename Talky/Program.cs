@@ -18,6 +18,9 @@ namespace Talky
     class Program
     {
 
+        public const double SPAM_DELAY = 0.5;
+        public static readonly DateTime EPOCH_START = new DateTime(1970, 1, 1);
+
         private ChannelRepository _channelRepository = ChannelRepository.Instance;
         private ClientRepository _clientRepository = ClientRepository.Instance;
         private CommandManager _commandManager = CommandManager.Instance;

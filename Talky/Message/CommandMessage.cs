@@ -42,6 +42,18 @@ namespace Talky.Message
                 _client.SendMessage("That command does not exist.");
                 return;
             }
+
+            int time = (int) (DateTime.UtcNow.Subtract(Program.EPOCH_START)).TotalSeconds;
+            int clientTime = _client.lastCommand;
+            bool isAdmin = (_client.Account != null ? _client.Account.Role.Equals("admin") : false);
+
+            if (!isAdmin && time - clientTime < Program.SPAM_DELAY)
+            {
+                _client.SendMessage("Please slow down those commands! You must wait a few moments in between commands to prevent SPAM (not the meaty type).");
+                return;
+            }
+
+            _client.lastCommand = time;
             theCommand.Execute(_client, args);
         }
 

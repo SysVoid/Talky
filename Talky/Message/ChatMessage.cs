@@ -25,12 +25,23 @@ namespace Talky.Message
                 actualMessage = actualMessage.Substring(1);
             }
 
-            if (actualMessage.StartsWith("register") || actualMessage.StartsWith("auth"))
+            if (actualMessage.StartsWith("register") || actualMessage.StartsWith("auth") || actualMessage.StartsWith("changepass"))
             {
-                _client.SendMessage("To protect our users, we do not send messages starting with 'register' or 'auth'. This is in case they miss out the / on the register or auth commands.");
+                _client.SendMessage("To protect our users, we do not send messages starting with 'register', 'changepass' or 'auth'. This is in case they miss out the / on the register, changepassword or auth commands.");
                 return;
             }
 
+            int time = (int) (DateTime.UtcNow.Subtract(Program.EPOCH_START)).TotalSeconds;
+            int clientTime = _client.lastMessage;
+            bool isAdmin = (_client.Account != null ? _client.Account.Role.Equals("admin") : false);
+
+            if (!isAdmin && time - clientTime < Program.SPAM_DELAY)
+            {
+                _client.SendMessage("Please slow down those messages! You must wait a few moments in between messages to prevent SPAM (not the meaty type).");
+                return;
+            }
+
+            _client.lastMessage = time;
             _client.Channel.BroadcastMessage($"<{(_client.Account != null && _client.Account.Role.Equals("admin") ? "%" : "")}{_client.Username}> {actualMessage}");
         }
 
