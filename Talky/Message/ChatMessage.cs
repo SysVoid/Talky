@@ -20,6 +20,15 @@ namespace Talky.Message
         protected override void Process()
         {
             string actualMessage = _message.Substring(2);
+            if (actualMessage.StartsWith(" "))
+            {
+                actualMessage = actualMessage.Substring(1);
+            }
+
+            while (actualMessage.EndsWith(" "))
+            {
+                actualMessage = actualMessage.Substring(0, actualMessage.Length - 1);
+            }
 
             if (actualMessage.StartsWith("register") || actualMessage.StartsWith("auth"))
             {

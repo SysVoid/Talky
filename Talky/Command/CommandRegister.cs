@@ -36,6 +36,12 @@ namespace Talky.Command
                 return;
             }
 
+            if (string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password) || password.Length < 6)
+            {
+                client.SendMessage("Invalid password. Passwords must contain at least 6 characters. Passwords may not be whitespace.");
+                return;
+            }
+
             if (UserAccount.Find(username) != null)
             {
                 client.SendMessage("An account with that username already exists.");

@@ -44,6 +44,11 @@ namespace Talky.Connection
                     return;
                 }
 
+                while (line.Contains("  "))
+                {
+                    line = line.Replace("  ", " ");
+                }
+
                 ChatMessage chatMessage = new ChatMessage(Client, line);
                 CommandMessage commandMessage = new CommandMessage(Client, line);
                 StatMessage statMessage = new StatMessage(Client, line);

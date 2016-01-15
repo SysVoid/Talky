@@ -46,6 +46,7 @@ namespace Talky
                 _commandManager.RegisterCommand(new CommandRole());
                 _commandManager.RegisterCommand(new CommandKick());
                 _commandManager.RegisterCommand(new CommandMute());
+                _commandManager.RegisterCommand(new CommandChangePassword());
             } catch (CommandExistsException cEE)
             {
                 Console.WriteLine(cEE.StackTrace);
@@ -121,7 +122,7 @@ namespace Talky
         {
             foreach (ServerClient client in ClientRepository.Instance.All())
             {
-                client.SendMessage("![GLOBAL]! " + message);
+                client.SendMessage("[GLOBAL] " + message);
             }
         }
 

@@ -46,6 +46,29 @@ namespace Talky.Authentication
             return true;
         }
 
+        internal static bool Attempt()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SetPassword(string password)
+        {
+            if (string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password) || password.Length < 6)
+            {
+                return false;
+            }
+
+            MySqlConnection connection = MySQLConnector.GetConnection();
+            MySqlCommand updateCommand = new MySqlCommand("UPDATE `users` SET `password`=@password WHERE `id`=@id ORDER BY `id` ASC LIMIT 1", connection);
+            updateCommand.Prepare();
+            updateCommand.Parameters.AddWithValue("@password", Hash(password));
+            updateCommand.Parameters.AddWithValue("@id", AccountId);
+            updateCommand.ExecuteReader();
+            connection.Close();
+            
+            return true;
+        }
+
         public static string Hash(string password)
         {
             SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();
