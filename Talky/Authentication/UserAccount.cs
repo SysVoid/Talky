@@ -69,6 +69,28 @@ namespace Talky.Authentication
             return true;
         }
 
+        public bool ComparePassword(string password)
+        {
+            MySqlConnection connection = MySQLConnector.GetConnection();
+
+            if (connection != null)
+            {
+                MySqlCommand command = new MySqlCommand("SELECT `password` FROM `users` WHERE `id`=@id AND `password`=@password ORDER BY `id` ASC LIMIT 1", connection);
+                command.Prepare();
+                command.Parameters.AddWithValue("@id", AccountId);
+                command.Parameters.AddWithValue("@password", Hash(password));
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    connection.Close();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static string Hash(string password)
         {
             SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();
@@ -162,6 +184,7 @@ namespace Talky.Authentication
                 }
             }
 
+            connection.Close();
             return null;
         }
 

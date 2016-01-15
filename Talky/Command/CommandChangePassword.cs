@@ -37,9 +37,15 @@ namespace Talky.Command
                 return;
             }
 
-            if (UserAccount.Attempt(client.Account.Username, currentPassword) == null)
+            if (!client.Account.ComparePassword(currentPassword))
             {
                 client.SendMessage("Failed to authenticate. Invalid password.");
+                return;
+            }
+
+            if (client.Account.ComparePassword(newPassword))
+            {
+                client.SendMessage("New password is the same as your old password.");
                 return;
             }
             
