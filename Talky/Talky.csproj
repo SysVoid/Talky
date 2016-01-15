@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -86,6 +86,8 @@
     <Compile Include="Channel\SystemChannel.cs" />
     <Compile Include="Client\ClientRepository.cs" />
     <Compile Include="Client\ServerClient.cs" />
+    <Compile Include="Command\CommandMute.cs" />
+    <Compile Include="Command\CommandKick.cs" />
     <Compile Include="Command\CommandRole.cs" />
     <Compile Include="Command\CommandAuth.cs" />
     <Compile Include="Command\CommandRegister.cs" />

@@ -27,7 +27,7 @@ namespace Talky.Message
                 return;
             }
 
-            _client.Channel.BroadcastMessage($"[{(_client.Account != null && _client.Account.Role.Equals("admin") ? "%" : "")}{_client.Username}] {actualMessage}");
+            _client.Channel.BroadcastMessage($"<{(_client.Account != null && _client.Account.Role.Equals("admin") ? "%" : "")}{_client.Username}> {actualMessage}");
         }
 
     }
