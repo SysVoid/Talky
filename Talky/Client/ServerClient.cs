@@ -78,21 +78,21 @@ namespace Talky.Client
             {
                 if (Account == null || !Account.Role.Equals("admin"))
                 {
-                    SendMessage("That channel is locked!");
+                    SendMessage("§2That channel is locked!");
                     return;
                 }
             }
 
             if (Channel != null)
             {
-                Channel.BroadcastMessage(Username + " left " + Channel.Name + ".");
+                Channel.BroadcastMessage(Username + " left " + "§4" + Channel.Name + "§0.");
             }
 
             Channel = channel;
 
             if (announce)
             {
-                channel.BroadcastMessage(Username + " joined " + channel.Name + "!");
+                channel.BroadcastMessage(Username + " joined " + "§4" + channel.Name + "§0!");
             }
         }
 
