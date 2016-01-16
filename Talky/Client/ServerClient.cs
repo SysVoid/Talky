@@ -69,12 +69,17 @@ namespace Talky.Client
         {
             if (reason != null)
             {
+                Channel.BroadcastMessage(Username + " disconnected: " + reason);
                 using (StreamWriter writer = new StreamWriter(TcpClient.GetStream()))
                 {
                     writer.WriteLine("M:§2You were disconnected from the server. Reason: " + reason);
                     writer.Flush();
                 }
+            } else
+            {
+                Channel.BroadcastMessage(Username + " disconnected.");
             }
+
             TcpClient.Client.Close();
             ClientRepository.Instance.Remove(this);
         }
