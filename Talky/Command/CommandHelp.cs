@@ -15,14 +15,14 @@ namespace Talky.Command
         public override void Execute(ServerClient client, string[] args)
         {
             IReadOnlyList<TalkyCommand> commands = CommandManager.Instance.All();
-            client.SendMessage("=COMMANDS=============");
+            client.SendMessage("§1=COMMANDS=============");
 
             foreach (TalkyCommand command in commands)
             {
                 client.SendMessage("[" + command.Usage + "] " + command.Description);
             }
 
-            client.SendMessage("=COMMANDS=============");
+            client.SendMessage("§1=COMMANDS=============");
         }
 
     }

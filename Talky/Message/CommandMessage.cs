@@ -31,15 +31,15 @@ namespace Talky.Message
 
             if (_client.Channel == null && !(command.Equals("name") || command.Equals("auth")))
             {
-                _client.SendMessage("Please use /name <name> to set a username before using commands.");
-                _client.SendMessage("If you are a registered client, please use /auth to claim your username.");
+                _client.SendMessage("§1Please use /name <name> to set a username before using commands.");
+                _client.SendMessage("§1If you are a registered client, please use /auth to claim your username.");
                 return;
             }
 
             TalkyCommand theCommand = CommandManager.Instance.Get(command);
             if (theCommand == null)
             {
-                _client.SendMessage("That command does not exist.");
+                _client.SendMessage("§2That command does not exist.");
                 return;
             }
 
@@ -49,7 +49,7 @@ namespace Talky.Message
 
             if (!isAdmin && time - clientTime < Program.SPAM_DELAY)
             {
-                _client.SendMessage("Please slow down those commands! You must wait a few moments in between commands to prevent SPAM (not the meaty type).");
+                _client.SendMessage("§2Please slow down those commands! You must wait a few moments in between commands to prevent SPAM (not the meaty type).");
                 return;
             }
 

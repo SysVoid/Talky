@@ -30,20 +30,20 @@ namespace Talky.Command
 
             if (desiredChannel.Length > 16 || desiredChannel.Substring(2).Contains("+") || desiredChannel.Contains("%") || desiredChannel.Contains("/") || desiredChannel.Contains("@") || desiredChannel.Contains("\\") || desiredChannel.Contains(";"))
             {
-                client.SendMessage("Invalid Channel name. Channel names may not contain +, %, /, @, ; or \\. Channel names also have a maximum length of 16 characters.");
+                client.SendMessage("§2Invalid Channel name. Channel names may not contain +, %, /, @, ; or \\. Channel names also have a maximum length of 16 characters.");
                 return;
             }
 
             ServerChannel channel = ChannelRepository.Instance.Get(desiredChannel);
             if (channel != null)
             {
-                client.SendMessage("That channel already exists.");
+                client.SendMessage("§2That channel already exists.");
                 return;
             }
 
             ClientChannel chan = new ClientChannel(desiredChannel);
             ChannelRepository.Instance.Store(chan);
-            client.SendMessage("Your channel has been created.");
+            client.SendMessage("§4Your channel has been created.");
             client.JoinChannel(chan);
         }
 

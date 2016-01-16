@@ -18,7 +18,7 @@ namespace Talky.Command
         {
             if (client.Account == null || !client.Account.Role.Equals("admin"))
             {
-                client.SendMessage("That command is admin only!");
+                client.SendMessage("§4That command is admin only!");
                 return;
             }
 
@@ -38,13 +38,13 @@ namespace Talky.Command
             UserAccount account = UserAccount.Find(username);
             if (account == null)
             {
-                client.SendMessage("User not found.");
+                client.SendMessage("§2User not found.");
                 return;
             }
 
             if (account.SetRole(role))
             {
-                client.SendMessage("Account role for " + account.Username + " set to " + role + ".");
+                client.SendMessage("§4Account role for " + account.Username + " set to " + role + ".");
 
                 ServerClient foundClient = ClientRepository.Instance.Find(account.Username);
                 if (foundClient != null)
@@ -54,11 +54,11 @@ namespace Talky.Command
                     {
                         foundClient.SendRawMessage($"S:Account:{foundClient.Account.AccountId};{foundClient.Account.Username};{foundClient.Account.Role}");
                     }
-                    foundClient.SendMessage("Your role was set to " + role + " by " + client.Username + ".");
+                    foundClient.SendMessage("§1Your role was set to " + role + " by " + client.Username + ".");
                 }
                 return;
             }
-            client.SendMessage("Failed to update account role for " + account.Username + ".");
+            client.SendMessage("§2Failed to update account role for " + account.Username + ".");
         }
 
     }

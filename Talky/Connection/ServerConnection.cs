@@ -40,7 +40,7 @@ namespace Talky.Connection
 
                 if (string.IsNullOrEmpty(line))
                 {
-                    Client.Disconnect("Unexpected EOL");
+                    Client.Disconnect("§2Unexpected EOL");
                     return;
                 }
 
@@ -70,7 +70,7 @@ namespace Talky.Connection
                 } else
                 {
                     // ???
-                    Client.Disconnect("What was that?");
+                    Client.Disconnect("§2What was that?");
                     return;
                 }
             }

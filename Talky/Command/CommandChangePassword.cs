@@ -17,7 +17,7 @@ namespace Talky.Command
         {
             if (client.Account == null)
             {
-                client.SendMessage("You must be authenticated to use this command. See /auth.");
+                client.SendMessage("§2You must be authenticated to use this command. See /auth.");
                 return;
             }
 
@@ -33,30 +33,30 @@ namespace Talky.Command
 
             if (string.IsNullOrEmpty(newPassword) || string.IsNullOrWhiteSpace(newPassword) || newPassword.Length < 6)
             {
-                client.SendMessage("Invalid password. Passwords must contain at least 6 characters. Passwords may not be whitespace.");
+                client.SendMessage("§2Invalid password. Passwords must contain at least 6 characters. Passwords may not be whitespace.");
                 return;
             }
 
             if (!client.Account.ComparePassword(currentPassword))
             {
-                client.SendMessage("Failed to authenticate. Invalid password.");
+                client.SendMessage("§2Failed to authenticate. Invalid password.");
                 return;
             }
 
             if (client.Account.ComparePassword(newPassword))
             {
-                client.SendMessage("New password is the same as your old password.");
+                client.SendMessage("§2New password is the same as your old password.");
                 return;
             }
             
             if (!newPassword.Equals(newPasswordRepeat, StringComparison.Ordinal))
             {
-                client.SendMessage("New password and password confirmation do not match. Please try again.");
+                client.SendMessage("§2New password and password confirmation do not match. Please try again.");
                 return;
             }
 
             client.Account.SetPassword(newPassword);
-            client.SendMessage("Your password has been updated.");
+            client.SendMessage("§4Your password has been updated.");
         }
 
     }

@@ -143,7 +143,7 @@ namespace Talky
             IReadOnlyCollection<ServerClient> clients = _clientRepository.All();
             foreach (ServerClient client in clients)
             {
-                client.Disconnect("Server went into panic mode.");
+                client.Disconnect("§1Server went into panic mode.");
             }
 
             Thread.Sleep(501);
@@ -195,7 +195,7 @@ namespace Talky
 
                 if (_channelRepository.GetLobby() == null)
                 {
-                    serverClient.Disconnect("Server Error: No Lobby!");
+                    serverClient.Disconnect("§2Server Error: No Lobby!");
                     continue;
                 }
 

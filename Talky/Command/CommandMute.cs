@@ -18,7 +18,7 @@ namespace Talky.Command
         {
             if (client.Account == null || !client.Account.Role.Equals("admin"))
             {
-                client.SendMessage("That command is admin only!");
+                client.SendMessage("§2That command is admin only!");
                 return;
             }
 
@@ -32,11 +32,11 @@ namespace Talky.Command
             ServerClient found = ClientRepository.Instance.Find(username);
             if (found == null)
             {
-                client.SendMessage("No client found with that username.");
+                client.SendMessage("§2No client found with that username.");
                 return;
             }
             found.Muted = !found.Muted;
-            client.SendMessage("Client mute set to: " + found.Muted + " for " + found.Username + ".");
+            client.SendMessage("§4Client mute set to: " + found.Muted + " for " + found.Username + ".");
         }
 
     }

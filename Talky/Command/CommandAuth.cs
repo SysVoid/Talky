@@ -28,7 +28,7 @@ namespace Talky.Command
             UserAccount account = UserAccount.Attempt(username, password);
             if (account == null)
             {
-                client.SendMessage("Invalid username/password.");
+                client.SendMessage("§2Invalid username/password.");
                 return;
             }
 
@@ -37,14 +37,14 @@ namespace Talky.Command
             {
                 if (!foundClient.Equals(client))
                 {
-                    foundClient.Disconnect("This username has been reclaimed by the account owner.");
+                    foundClient.Disconnect("§2This username has been reclaimed by the account owner.");
                 }
             }
 
             string oldUsername = client.Username;
             client.Account = account;
             client.Username = account.Username;
-            client.SendMessage("You are now authenticated as " + account.Username + "!");
+            client.SendMessage("§4You are now authenticated as " + account.Username + "!");
 
             if (client.Channel == null)
             {
@@ -53,7 +53,7 @@ namespace Talky.Command
 
             if (!oldUsername.Equals("%"))
             {
-                client.Channel.BroadcastMessage(oldUsername + " is now known as " + account.Username);
+                client.Channel.BroadcastMessage("§1" + oldUsername + " is now known as " + account.Username);
             }
         }
 

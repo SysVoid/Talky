@@ -21,12 +21,12 @@ namespace Talky.Command
                 return;
             }
             
-            client.SendMessage("=CHANNELS=============");
+            client.SendMessage("§1=CHANNELS=============");
             foreach (ServerChannel channel in ChannelRepository.Instance.All())
             {
                 client.SendMessage("[" + channel.Name + "] " + (channel.Locked ? "Locked" : "Unlocked"));
             }
-            client.SendMessage("=CHANNELS=============");
+            client.SendMessage("§1=CHANNELS=============");
         }
 
     }

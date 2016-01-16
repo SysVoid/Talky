@@ -31,15 +31,15 @@ namespace Talky.Command
             ServerChannel channel = ChannelRepository.Instance.Get(desiredChannel);
             if (channel == null)
             {
-                client.SendMessage("That channel does not exist.");
-                client.SendMessage("Use /clist to see a list of channels.");
-                client.SendMessage("Use /cc to create a temporary channel.");
+                client.SendMessage("§2That channel does not exist.");
+                client.SendMessage("§2Use /clist to see a list of channels.");
+                client.SendMessage("§2Use /cc to create a temporary channel.");
                 return;
             }
 
             if (client.Channel.Equals(channel))
             {
-                client.SendMessage("You are already in that channel!");
+                client.SendMessage("§2You are already in that channel!");
                 return;
             }
 

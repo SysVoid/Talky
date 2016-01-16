@@ -26,32 +26,32 @@ namespace Talky.Command
 
             if (desiredUsername.Length > 16 || desiredUsername.Contains("%") || desiredUsername.Contains("/") || desiredUsername.Contains("@") || desiredUsername.Contains("\\") || desiredUsername.Contains(";"))
             {
-                client.SendMessage("Invalid username. Usernames may not contain %, /, @, ; or \\. Usernames also have a maximum length of 16 characters.");
+                client.SendMessage("§2Invalid username. Usernames may not contain %, /, @, ; or \\. Usernames also have a maximum length of 16 characters.");
                 return;
             }
 
             if (ClientRepository.Instance.Exists(desiredUsername))
             {
-                client.SendMessage("That username is already in use.");
+                client.SendMessage("§2That username is already in use.");
                 return;
             }
 
             if (UserAccount.Find(desiredUsername) != null)
             {
-                client.SendMessage("That username is linked to an account.");
-                client.SendMessage("If you are the account holder, use /auth to login and claim the username.");
+                client.SendMessage("§2That username is linked to an account.");
+                client.SendMessage("§2If you are the account holder, use /auth to login and claim the username.");
                 return;
             }
 
             if (client.Account != null)
             {
-                client.SendMessage("Authenticated clients may not change their username.");
+                client.SendMessage("§2Authenticated clients may not change their username.");
                 return;
             }
 
             string oldUsername = client.Username;
             client.Username = desiredUsername;
-            client.SendMessage("You are now known as " + desiredUsername + ".");
+            client.SendMessage("§4You are now known as " + desiredUsername + ".");
 
             if (client.Channel == null)
             {
@@ -60,7 +60,7 @@ namespace Talky.Command
 
             if (!oldUsername.Equals("%"))
             {
-                client.Channel.BroadcastMessage(oldUsername + " is now known as " + desiredUsername);
+                client.Channel.BroadcastMessage("§1" + oldUsername + " is now known as " + desiredUsername);
             }
         }
 

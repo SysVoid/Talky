@@ -16,7 +16,7 @@ namespace Talky.Command
         {
             if (client.Muted)
             {
-                client.SendMessage("You are muted.");
+                client.SendMessage("§2You are muted.");
                 return;
             }
 
@@ -43,18 +43,18 @@ namespace Talky.Command
             ServerClient recipient = ClientRepository.Instance.Find(recipientUsername);
             if (recipient == null)
             {
-                client.SendMessage("No client found by that username.");
+                client.SendMessage("§2No client found by that username.");
                 return;
             }
 
             if (recipient.Equals(client))
             {
-                client.SendMessage("You cannot send messages to yourself.");
+                client.SendMessage("§2You cannot send messages to yourself.");
                 return;
             }
 
-            recipient.SendMessage("<" + client.Username + " -> you> " + message);
-            client.SendMessage("<you -> " + recipient.Username + "> " + message);
+            recipient.SendMessage("<§1" + client.Username + " -> you§0> " + message);
+            client.SendMessage("<§1you -> " + recipient.Username + "§0> " + message);
         }
 
     }

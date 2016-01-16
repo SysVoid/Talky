@@ -23,7 +23,7 @@ namespace Talky.Command
 
         public void SendUsage(ServerClient client)
         {
-            client.SendMessage("Usage: " + Usage);
+            client.SendMessage("§1Usage: " + Usage);
         }
 
         public abstract void Execute(ServerClient client, string[] args);

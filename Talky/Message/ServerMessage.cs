@@ -29,15 +29,15 @@ namespace Talky.Message
             {
                 if (_client.Channel == null)
                 {
-                    _client.SendMessage("You are not in a channel. Use /clist to see a list of channels.");
+                    _client.SendMessage("§2You are not in a channel. Use /clist to see a list of channels.");
                     return;
                 } else if (_client.Muted)
                 {
-                    _client.SendMessage("You are muted.");
+                    _client.SendMessage("§2You are muted.");
                     return;
                 } else if (_client.Username.Equals("%"))
                 {
-                    _client.SendMessage("Please set your username with: /name <username>");
+                    _client.SendMessage("§1Please set your username with: /name <username>");
                     return;
                 }
             }
