@@ -32,7 +32,7 @@ namespace Talky.Message
             }
 
             int time = (int) (DateTime.UtcNow.Subtract(Program.EPOCH_START)).TotalSeconds;
-            int clientTime = _client.lastMessage;
+            int clientTime = _client.LastMessage;
             bool isAdmin = (_client.Account != null ? _client.Account.Role.Equals("admin") : false);
 
             if (!isAdmin && time - clientTime < Program.SPAM_DELAY)
@@ -41,7 +41,7 @@ namespace Talky.Message
                 return;
             }
 
-            _client.lastMessage = time;
+            _client.LastMessage = time;
             _client.Channel.BroadcastMessage($"<{(_client.Account != null && _client.Account.Role.Equals("admin") ? "§2%" : "")}{_client.Username}§0> {actualMessage}");
         }
 

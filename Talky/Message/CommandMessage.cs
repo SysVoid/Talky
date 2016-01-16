@@ -44,7 +44,7 @@ namespace Talky.Message
             }
 
             int time = (int) (DateTime.UtcNow.Subtract(Program.EPOCH_START)).TotalSeconds;
-            int clientTime = _client.lastCommand;
+            int clientTime = _client.LastCommand;
             bool isAdmin = (_client.Account != null ? _client.Account.Role.Equals("admin") : false);
 
             if (!isAdmin && time - clientTime < Program.SPAM_DELAY)
@@ -53,7 +53,7 @@ namespace Talky.Message
                 return;
             }
 
-            _client.lastCommand = time;
+            _client.LastCommand = time;
             theCommand.Execute(_client, args);
         }
 

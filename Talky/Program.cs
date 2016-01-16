@@ -134,6 +134,9 @@ namespace Talky
 
             Thread channelManagerThread = new Thread(new ThreadStart(MonitorChannels));
             channelManagerThread.Start();
+
+            Thread activityMonitorThread = new Thread(new ThreadStart(MonitorActivity));
+            activityMonitorThread.Start();
         }
 
         public void OHGODNO(string WHAT, System.Exception theRealProblem = null)
@@ -217,6 +220,27 @@ namespace Talky
                         if (_clientRepository.Find(clientChannel).Count == 0)
                         {
                             _channelRepository.Remove(clientChannel);
+                        }
+                    }
+                }
+
+                Thread.Sleep(5000);
+            }
+        }
+
+        private void MonitorActivity()
+        {
+            while (!PanicMode)
+            {
+                IReadOnlyCollection<ServerClient> clients = _clientRepository.All();
+                if (clients.Count > 0)
+                {
+                    foreach (ServerClient client in clients)
+                    {
+                        int now = (int) (DateTime.UtcNow.Subtract(EPOCH_START)).TotalSeconds;
+                        if (client.LastActivity < now - 60)
+                        {
+                            client.Disconnect("§4Idle for " + (now - client.LastActivity) + " seconds.");
                         }
                     }
                 }

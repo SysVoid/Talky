@@ -58,6 +58,8 @@ namespace Talky.Connection
                 CommandMessage commandMessage = new CommandMessage(Client, line);
                 StatMessage statMessage = new StatMessage(Client, line);
 
+                Client.LastActivity = (int) (DateTime.UtcNow.Subtract(Program.EPOCH_START)).TotalSeconds;
+
                 if (chatMessage.Valid())
                 {
                     chatMessage.Handle();
