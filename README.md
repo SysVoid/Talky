@@ -2,9 +2,8 @@
 Talky is a C# project that I started. It is a part of my C# learning process.
 Please don't hate it. It's nice.
 
-#LAZY!
-Not committing that chat client quite yet, so for now - feel free to communicate with it
-using Telnet and the [Protocol](#protocol) below.
+#Client
+Use my [Amazing Client](https://github.com/SysVoid/Talky-Client) to connect to this server.
 
 #MySQL
 Upon initial connection, a MySQL configuration file is stored at C:\Talky\database.tcfg
