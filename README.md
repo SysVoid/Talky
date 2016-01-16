@@ -98,6 +98,16 @@ S:ChannelList:channel1;channel2;channel3
 ```
 Nice and simple.
 
+Here's how you get channel clients:
+```
+S:ChannelClientList
+```
+Here's the response:
+```
+S:ChannelClientList:dude1;dude2;dudet1;dudet2
+```
+Nice and simple.
+
 Here's how you get information about the currently connected client:
 ```
 S:Client
