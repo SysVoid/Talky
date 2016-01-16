@@ -99,6 +99,7 @@
     <Compile Include="Command\CommandHelp.cs" />
     <Compile Include="Command\CommandJoin.cs" />
     <Compile Include="Command\CommandName.cs" />
+    <Compile Include="Configuration\ConfigurationFile.cs" />
     <Compile Include="Connection\ServerConnection.cs" />
     <Compile Include="Database\MySQLConnector.cs" />
     <Compile Include="Exception\CommandExistsException.cs" />

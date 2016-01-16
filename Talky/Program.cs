@@ -69,9 +69,6 @@ namespace Talky
             Thread consoleThread = new Thread(new ThreadStart(ShowConsole));
             consoleThread.Start();
 
-            Thread serverMessageThread = new Thread(new ThreadStart(ServerMessageReader));
-            serverMessageThread.Start();
-
             Thread channelManagerThread = new Thread(new ThreadStart(MonitorChannels));
             channelManagerThread.Start();
         }
@@ -113,59 +110,14 @@ namespace Talky
         {
             while (!PanicMode)
             {
-                int before = Console.CursorLeft;
-
-                ClearConsoleLine(0);
+                Console.Clear();
                 Console.WriteLine("Talky | Created by SysVoid");
-                ClearConsoleLine(1);
                 Console.WriteLine("==========================");
-                ClearConsoleLine(2);
                 Console.WriteLine("Clients: " + _clientRepository.Count());
-                ClearConsoleLine(3);
                 Console.WriteLine("Channels: " + _channelRepository.Count());
-                ClearConsoleLine(4);
                 Console.WriteLine("Commands: " + _commandManager.Count());
-                ClearConsoleLine(5);
                 Console.WriteLine("==========================");
-
-                Console.SetCursorPosition(before, 6);
                 Thread.Sleep(500);
-            }
-        }
-
-        private static void ClearConsoleLine(int line)
-        {
-            Console.SetCursorPosition(0, line);
-            Console.Write(new string(' ', Console.WindowWidth - 1));
-            Console.SetCursorPosition(0, line);
-        }
-
-        public void ServerMessageReader()
-        {
-            while (!PanicMode)
-            {
-                string input = Console.ReadLine();
-
-                if (string.IsNullOrEmpty(input))
-                {
-                    continue;
-                }
-
-                GlobalBroadcastMessage(input);
-                ClearConsoleLine(6);
-                Console.SetCursorPosition(0, 7);
-                Console.WriteLine("Global message sent!");
-                Console.SetCursorPosition(0, 6);
-                Thread.Sleep(1500);
-                ClearConsoleLine(7);
-            }
-        }
-
-        private void GlobalBroadcastMessage(string message)
-        {
-            foreach (ServerClient client in ClientRepository.Instance.All())
-            {
-                client.SendMessage("[GLOBAL] " + message);
             }
         }
 

@@ -7,9 +7,14 @@ Not committing that chat client quite yet, so for now - feel free to communicate
 using Telnet and the [Protocol](#protocol) below.
 
 #MySQL
-Since I still don't have a configuration file thing setup for this, to use MySQL you will need to edit this file:
+Upon initial connection, a MySQL configuration file is stored at C:\Talky\database.tcfg
 
-[MySQLConnector.cs](https://github.com/SysVoid/Talky/blob/master/Talky/Database/MySQLConnector.cs)
+#Configuration
+Here's the config format:
+```
+key:value
+```
+Don't put a space before or after the `:`.
 
 #Authentication
 This server comes with some sexy authentication.
