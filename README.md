@@ -16,6 +16,26 @@ key:value
 ```
 Don't put a space before or after the `:`.
 
+##Adding Channels
+Configuration File: `C:\Talky\channels.tcfg`
+
+The channel format is as follows:
+```
+NAME:LOBBY:LOCKED
+==================
++NAME:true/false,true/false
+```
+Lobbies cannot be locked.
+
+Normal channels can be locked.
+
+Examples:
+```
++CoolLobbyBro:true,false
++CoolChannelBro:false,true
+```
+Note that there can only be one lobby.
+
 #Authentication
 This server comes with some sexy authentication.
 

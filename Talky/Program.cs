@@ -12,6 +12,7 @@ using System.Net;
 using Talky.Connection;
 using Talky.Command;
 using Talky.Exception;
+using Talky.Configuration;
 
 namespace Talky
 {
@@ -40,8 +41,57 @@ namespace Talky
         {
             Instance = this;
 
-            _channelRepository.Store(new LobbyChannel("+lobby"));
-            _channelRepository.Store(new SystemChannel("+admins", true));
+            Dictionary<string, string> defaults = new Dictionary<string, string>();
+            defaults.Add("+lobby", "true,false");
+            defaults.Add("+admins", "false,true");
+
+            ConfigurationFile config = new ConfigurationFile("channels");
+            if (!config.Exists())
+            {
+                config.Write(defaults);
+            }
+
+            IReadOnlyDictionary<string, string> channels = config.Values();
+
+            foreach (string key in channels.Keys)
+            {
+                string channelName = key;
+                if (!channelName.StartsWith("+"))
+                {
+                    channelName = "+" + channelName;
+                }
+
+                string settings;
+                string[] splitSettings;
+                channels.TryGetValue(key, out settings);
+                splitSettings = settings.Split(new char[] { ',' }, 2);
+
+                if (splitSettings.Length != 2)
+                {
+                    continue;
+                }
+
+                bool lobby = (splitSettings[0].Equals("true") ? true : false);
+                bool locked = (splitSettings[1].Equals("true") ? true : false);
+
+                if (lobby && _channelRepository.GetLobby() != null)
+                {
+                    continue;
+                }
+
+                if (_channelRepository.Get(channelName) != null)
+                {
+                    continue;
+                }
+
+                if (lobby)
+                {
+                    _channelRepository.Store(new LobbyChannel(channelName));
+                } else
+                {
+                    _channelRepository.Store(new SystemChannel(channelName, locked));
+                }
+            }
 
             try
             {
@@ -129,6 +179,12 @@ namespace Talky
             {
                 TcpClient tcpClient = listener.AcceptTcpClient();
                 ServerClient serverClient = new ServerClient(tcpClient);
+
+                if (_channelRepository.GetLobby() == null)
+                {
+                    serverClient.Disconnect("Server Error: No Lobby!");
+                    continue;
+                }
 
                 Thread clientThread = new Thread(new ThreadStart(new ServerConnection(serverClient).HandleMessages));
                 clientThread.Start();
