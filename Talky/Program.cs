@@ -238,9 +238,9 @@ namespace Talky
                     foreach (ServerClient client in clients)
                     {
                         int now = (int) (DateTime.UtcNow.Subtract(EPOCH_START)).TotalSeconds;
-                        if (client.LastActivity < now - 60)
+                        if (client.LastActivity < now - 300)
                         {
-                            client.Disconnect("§4Idle for " + (now - client.LastActivity) + " seconds.");
+                            client.Disconnect("Idle for " + (now - client.LastActivity) + " seconds.");
                         }
                     }
                 }

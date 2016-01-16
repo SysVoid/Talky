@@ -40,7 +40,10 @@ namespace Talky.Connection
 
                 if (string.IsNullOrEmpty(line))
                 {
-                    Client.Disconnect("§2Unexpected EOL");
+                    if (Client.TcpClient.Connected)
+                    {
+                        Client.Disconnect();
+                    }
                     return;
                 }
 
