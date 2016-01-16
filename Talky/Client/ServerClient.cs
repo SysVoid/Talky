@@ -18,7 +18,6 @@ namespace Talky.Client
 
         public int LastMessage { get; set; } = 0;
         public int LastCommand { get; set; } = 0;
-
         public int LastActivity { get; set; } = 0;
 
         private string _username;

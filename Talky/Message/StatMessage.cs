@@ -28,7 +28,7 @@ namespace Talky.Message
 
                 IReadOnlyList<ServerChannel> serverChannels = (IReadOnlyList<ServerChannel>) ChannelRepository.Instance.All();
                 int max = serverChannels.Count;
-                
+
                 for (int i = 0; i < max; i++)
                 {
                     if (i != max - 1)
@@ -41,6 +41,30 @@ namespace Talky.Message
                 }
 
                 _client.SendRawMessage("S:ChannelList:" + channels);
+            } else if (actualMessage.Equals("ChannelClientList"))
+            {
+                if (_client.Channel == null)
+                {
+                    return;
+                }
+
+                string clients = "";
+
+                IReadOnlyList<ServerClient> clientsList = (IReadOnlyList<ServerClient>) ClientRepository.Instance.Find(_client.Channel);
+                int max = clientsList.Count;
+
+                for (int i = 0; i < max; i++)
+                {
+                    if (i != max - 1)
+                    {
+                        clients += clientsList[i].Username + ";";
+                    } else
+                    {
+                        clients += clientsList[i].Username;
+                    }
+                }
+
+                _client.SendRawMessage("S:ChannelClientList:" + clients);
             } else if (actualMessage.Equals("Client"))
             {
                 _client.SendRawMessage($"S:Client:{(_client.Username.Equals("%") ? "N/A" : _client.Username)};{_client.Muted.ToString()};{(_client.Channel == null ? "N/A" : _client.Channel.Name)}");
