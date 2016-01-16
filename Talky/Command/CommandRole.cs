@@ -18,7 +18,7 @@ namespace Talky.Command
         {
             if (client.Account == null || !client.Account.Role.Equals("admin"))
             {
-                client.SendMessage("§4That command is admin only!");
+                client.SendMessage("§2That command is admin only!");
                 return;
             }
 
