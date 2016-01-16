@@ -2,6 +2,9 @@
 Talky is a C# project that I started. It is a part of my C# learning process.
 Please don't hate it. It's nice.
 
+Here's a screenshot of the server and client.
+![screenshot](http://i.imgur.com/PFqQi9a.png)
+
 #Client
 Use my [Amazing Client](https://github.com/SysVoid/Talky-Client) to connect to this server.
 
