@@ -66,7 +66,7 @@ namespace Talky.Client
         {
             if (reason != null)
             {
-                SendRawMessage("You were disconnected from the server. Reason: " + reason);
+                SendRawMessage("§2You were disconnected from the server. Reason: " + reason);
             }
             TcpClient.Close();
             ClientRepository.Instance.Remove(this);

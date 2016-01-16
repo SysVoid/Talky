@@ -34,12 +34,25 @@ namespace Talky
 
         static void Main(string[] args)
         {
-            new Program();
+            int port = 0;
+            if (args.Length > 0)
+            {
+                string thePort = args[0];
+                int.TryParse(thePort, out port);
+            }
+
+            if (port <= 0)
+            {
+                port = 4096;
+            }
+
+            new Program(port);
         }
 
-        private Program()
+        private Program(int port)
         {
             Instance = this;
+            Port = port;
 
             Dictionary<string, string> defaults = new Dictionary<string, string>();
             defaults.Add("+lobby", "true,false");

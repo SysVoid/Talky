@@ -32,7 +32,7 @@ namespace Talky.Connection
                 
                 try
                 {
-                    line = reader.ReadLine();
+                    line = reader.ReadLine().Replace("§", "");
                 } catch (System.Exception e)
                 {
                     line = null;
