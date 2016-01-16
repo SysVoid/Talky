@@ -50,17 +50,17 @@ namespace Talky.Message
 
                 string clients = "";
 
-                IReadOnlyList<ServerClient> clientsList = (IReadOnlyList<ServerClient>) ClientRepository.Instance.Find(_client.Channel);
-                int max = clientsList.Count;
+                IReadOnlyList<ServerClient> clientList = (IReadOnlyList<ServerClient>) ClientRepository.Instance.Find(_client.Channel);
+                int max = clientList.Count;
 
                 for (int i = 0; i < max; i++)
                 {
                     if (i != max - 1)
                     {
-                        clients += clientsList[i].Username + ";";
+                        clients += (clientList[i].Account != null && clientList[i].Account.Role.Equals("admin") ? "%" : "") + clientList[i].Username + ";";
                     } else
                     {
-                        clients += clientsList[i].Username;
+                        clients += (clientList[i].Account != null && clientList[i].Account.Role.Equals("admin") ? "%" : "") + clientList[i].Username;
                     }
                 }
 
