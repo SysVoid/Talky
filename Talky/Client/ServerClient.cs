@@ -76,7 +76,10 @@ namespace Talky.Client
                 }
             } else
             {
-                Channel.BroadcastMessage(Username + " disconnected.");
+                if (!string.IsNullOrEmpty(Username))
+                {
+                    Channel.BroadcastMessage(Username + " disconnected.");
+                }
             }
 
             TcpClient.Client.Close();

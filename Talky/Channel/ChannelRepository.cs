@@ -27,31 +27,16 @@ namespace Talky.Channel
         {
             lock (_lock)
             {
-                foreach (ServerChannel channel in _channels)
-                {
-                    if (channel is LobbyChannel)
-                    {
-                        return (LobbyChannel) channel;
-                    }
-                }
+                return (LobbyChannel) _channels.FirstOrDefault(channel => channel is LobbyChannel);
             }
-            return null;
         }
 
         public ServerChannel Get(string name)
         {
-            name = name.ToLower();
             lock (_lock)
             {
-                foreach (ServerChannel channel in _channels)
-                {
-                    if (channel.Name.Equals(name))
-                    {
-                        return channel;
-                    }
-                }
+                return _channels.FirstOrDefault(channel => string.Equals(channel.Name, name, StringComparison.InvariantCultureIgnoreCase));
             }
-            return null;
         }
 
         public bool Exists(string name)

@@ -30,15 +30,8 @@ namespace Talky.Client
             username = username.ToLower();
             lock (_lock)
             {
-                foreach (ServerClient client in _clients)
-                {
-                    if (client.Username.ToLower().Equals(username))
-                    {
-                        return client;
-                    }
-                }
+                return _clients.FirstOrDefault(client => String.Equals(client.Username, username, StringComparison.InvariantCultureIgnoreCase));
             }
-            return null;
         }
 
         public bool Exists(string username)
@@ -54,30 +47,15 @@ namespace Talky.Client
         {
             lock (_lock)
             {
-                foreach (ServerClient client in _clients)
-                {
-                    if (client.TcpClient.Equals(tcpClient))
-                    {
-                        return client;
-                    }
-                }
+                return _clients.FirstOrDefault(client => Equals(client.TcpClient, tcpClient));
             }
-            return null;
         }
 
         public IReadOnlyCollection<ServerClient> Find(ServerChannel channel)
         {
             lock (_lock)
             {
-                List<ServerClient> clients = new List<ServerClient>();
-                foreach (ServerClient client in _clients)
-                {
-                    if (client.Channel != null && client.Channel.Equals(channel))
-                    {
-                        clients.Add(client);
-                    }
-                }
-                return clients.AsReadOnly();
+                return _clients.FindAll(client => Equals(client.Channel, channel));
             }
         }
 
