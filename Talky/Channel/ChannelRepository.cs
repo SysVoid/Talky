@@ -46,18 +46,10 @@ namespace Talky.Channel
 
         public IReadOnlyCollection<T> Get<T>() where T : ServerChannel
         {
-            List<T> channels = new List<T>();
             lock (_lock)
             {
-                foreach (ServerChannel channel in _channels)
-                {
-                    if (channel is T)
-                    {
-                        channels.Add((T) channel);
-                    }
-                }
+                return (IReadOnlyCollection<T>) _channels.FindAll(channel => channel is T);
             }
-            return channels.AsReadOnly();
         }
 
         public bool Exists<T>() where T : ServerChannel
