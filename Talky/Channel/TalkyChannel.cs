@@ -7,13 +7,13 @@ using Talky.Client;
 
 namespace Talky.Channel
 {
-    abstract class ServerChannel
+    abstract class TalkyChannel
     {
 
         public string Name { get; private set; }
         public bool Locked { get; set; }
 
-        protected ServerChannel(string name, bool locked)
+        protected TalkyChannel(string name, bool locked)
         {
             if (!name.StartsWith("+"))
             {
@@ -39,7 +39,7 @@ namespace Talky.Channel
                     return;
                 }
 
-                ServerChannel oldChannel = client.Channel;
+                TalkyChannel oldChannel = client.Channel;
                 client.JoinChannel(lobby, false);
 
                 if (reason != null)
