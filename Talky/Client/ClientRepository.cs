@@ -51,7 +51,7 @@ namespace Talky.Client
             }
         }
 
-        public IReadOnlyCollection<ServerClient> Find(ServerChannel channel)
+        public IReadOnlyCollection<ServerClient> Find(TalkyChannel channel)
         {
             lock (_lock)
             {

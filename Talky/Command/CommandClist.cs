@@ -22,7 +22,7 @@ namespace Talky.Command
             }
             
             client.SendMessage("§1=CHANNELS=============");
-            foreach (ServerChannel channel in ChannelRepository.Instance.All())
+            foreach (TalkyChannel channel in ChannelRepository.Instance.All())
             {
                 client.SendMessage("[" + channel.Name + "] " + (channel.Locked ? "Locked" : "Unlocked"));
             }

@@ -10,12 +10,12 @@ namespace Talky.Channel
     {
 
         public static ChannelRepository Instance { get; } = new ChannelRepository();
-        private List<ServerChannel> _channels = new List<ServerChannel>();
+        private List<TalkyChannel> _channels = new List<TalkyChannel>();
         private object _lock = new object();
 
         private ChannelRepository() { }
         
-        public void Store(ServerChannel channel)
+        public void Store(TalkyChannel channel)
         {
             lock (_lock)
             {
@@ -31,7 +31,7 @@ namespace Talky.Channel
             }
         }
 
-        public ServerChannel Get(string name)
+        public TalkyChannel Get(string name)
         {
             lock (_lock)
             {
@@ -44,24 +44,32 @@ namespace Talky.Channel
             return (Get(name) != null);
         }
 
-        public IReadOnlyCollection<T> Get<T>() where T : ServerChannel
+        public IReadOnlyList<T> Get<T>() where T : TalkyChannel
         {
             lock (_lock)
             {
-                return (IReadOnlyCollection<T>) _channels.FindAll(channel => channel is T);
+                List<TalkyChannel> channels = _channels.FindAll(channel => channel is T);
+                List<T> goodChannels = new List<T>();
+
+                foreach (TalkyChannel channel in channels)
+                {
+                    goodChannels.Add((T) channel);
+                }
+
+                return goodChannels;
             }
         }
 
-        public bool Exists<T>() where T : ServerChannel
+        public bool Exists<T>() where T : TalkyChannel
         {
             return (Get<T>().Count > 0);
         }
 
-        public IReadOnlyCollection<ServerChannel> All()
+        public IReadOnlyCollection<TalkyChannel> All()
         {
             lock (_lock)
             {
-                return new List<ServerChannel>(_channels).AsReadOnly();
+                return new List<TalkyChannel>(_channels).AsReadOnly();
             }
         }
 
@@ -73,7 +81,7 @@ namespace Talky.Channel
             }
         }
 
-        public void Remove(ServerChannel channel)
+        public void Remove(TalkyChannel channel)
         {
             lock (_lock)
             {

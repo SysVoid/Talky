@@ -26,7 +26,7 @@ namespace Talky.Message
             {
                 string channels = "";
 
-                IReadOnlyList<ServerChannel> serverChannels = (IReadOnlyList<ServerChannel>) ChannelRepository.Instance.All();
+                IReadOnlyList<TalkyChannel> serverChannels = (IReadOnlyList<TalkyChannel>) ChannelRepository.Instance.All();
                 int max = serverChannels.Count;
 
                 for (int i = 0; i < max; i++)

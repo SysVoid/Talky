@@ -28,7 +28,7 @@ namespace Talky.Command
                 desiredChannel = "+" + desiredChannel;
             }
 
-            ServerChannel channel = ChannelRepository.Instance.Get(desiredChannel);
+            TalkyChannel channel = ChannelRepository.Instance.Get(desiredChannel);
             if (channel == null)
             {
                 client.SendMessage("§2That channel does not exist.");

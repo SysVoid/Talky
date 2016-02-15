@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\UserAccount.cs" />
-    <Compile Include="Channel\ServerChannel.cs" />
+    <Compile Include="Channel\TalkyChannel.cs" />
     <Compile Include="Channel\ChannelRepository.cs" />
     <Compile Include="Channel\LobbyChannel.cs" />
     <Compile Include="Channel\ClientChannel.cs" />

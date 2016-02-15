@@ -35,7 +35,7 @@ namespace Talky.Client
         }
 
         public bool Muted { get; set; } = false;
-        public ServerChannel Channel { get; private set; }
+        public TalkyChannel Channel { get; private set; }
 
         public UserAccount Account { get; set; } = null;
 
@@ -76,7 +76,7 @@ namespace Talky.Client
                 }
             } else
             {
-                if (!string.IsNullOrEmpty(Username))
+                if (!string.IsNullOrEmpty(Username) && !Username.Equals("%"))
                 {
                     Channel.BroadcastMessage(Username + " disconnected.");
                 }
@@ -86,7 +86,7 @@ namespace Talky.Client
             ClientRepository.Instance.Remove(this);
         }
 
-        public void JoinChannel(ServerChannel channel, bool announce = true)
+        public void JoinChannel(TalkyChannel channel, bool announce = true)
         {
             if (channel.Locked)
             {

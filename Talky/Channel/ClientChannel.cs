@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Talky.Channel
 {
-    class ClientChannel : ServerChannel
+    class ClientChannel : TalkyChannel
     {
 
         public ClientChannel(string name) : base(name, false) { }
