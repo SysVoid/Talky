@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Talky.Authentication;
 using Talky.Client;
 
 namespace Talky.Message
@@ -42,7 +43,7 @@ namespace Talky.Message
             }
 
             _client.LastMessage = time;
-            _client.Channel.BroadcastMessage($"<{(_client.Account != null && _client.Account.Role.Equals("admin") ? "§2%" : "")}{_client.Username}§0> {actualMessage}");
+            _client.Channel.BroadcastMessage($"<{(_client.Account != null && _client.Account.Role.Equals(Role.Admin) ? "§2%" : "")}{_client.Username}§0> {actualMessage}");
         }
 
     }

@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\Role.cs" />
     <Compile Include="Authentication\UserAccount.cs" />
     <Compile Include="Channel\TalkyChannel.cs" />
     <Compile Include="Channel\ChannelRepository.cs" />

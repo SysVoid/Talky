@@ -16,7 +16,7 @@ namespace Talky.Authentication
         public string Username { get; private set; }
         public string CreatedAt { get; private set; }
         public string LastLogin { get; private set; }
-        public string Role { get; private set; }
+        public Role Role { get; private set; }
 
         private UserAccount(int accountId, string username, string createdAt, string lastLogin, string role)
         {
@@ -24,7 +24,15 @@ namespace Talky.Authentication
             Username = username;
             CreatedAt = createdAt;
             LastLogin = lastLogin;
-            Role = role;
+            Role = StringToRole(role);
+        }
+
+        private Role StringToRole(string role)
+        {
+            Role roleTmp;
+            Enum.TryParse(role, true, out roleTmp);
+
+            return roleTmp;
         }
 
         public bool SetRole(string role)
@@ -42,13 +50,8 @@ namespace Talky.Authentication
             updateCommand.ExecuteReader();
             connection.Close();
 
-            Role = role;
+            Role = StringToRole(role);
             return true;
-        }
-
-        internal static bool Attempt()
-        {
-            throw new NotImplementedException();
         }
 
         public bool SetPassword(string password)
